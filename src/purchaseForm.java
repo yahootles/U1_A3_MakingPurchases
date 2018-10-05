@@ -56,6 +56,7 @@ public class purchaseForm extends javax.swing.JFrame {
         taxLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        exitButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,6 +89,7 @@ public class purchaseForm extends javax.swing.JFrame {
         totalLabel.setText("Total:");
         mainPanel.add(totalLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, 20));
 
+        beetsaSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
         beetsaSpinner.setRequestFocusEnabled(false);
         mainPanel.add(beetsaSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 50, -1));
 
@@ -95,18 +97,24 @@ public class purchaseForm extends javax.swing.JFrame {
         beetsaLabel.setForeground(new java.awt.Color(255, 67, 8));
         beetsaLabel.setText("Beetsa: $14.97");
         mainPanel.add(beetsaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
+
+        banzerottiSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
         mainPanel.add(banzerottiSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 50, -1));
 
         banzerottiLabel.setFont(new java.awt.Font("Matura MT Script Capitals", 0, 18)); // NOI18N
         banzerottiLabel.setForeground(new java.awt.Color(255, 67, 8));
         banzerottiLabel.setText("Banzerotti: $7.49");
         mainPanel.add(banzerottiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
+
+        dippingSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
         mainPanel.add(dippingSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 50, -1));
 
         dippingLabel.setFont(new java.awt.Font("Matura MT Script Capitals", 0, 18)); // NOI18N
         dippingLabel.setForeground(new java.awt.Color(255, 67, 8));
         dippingLabel.setText("Beet Dipping Sauce: $3.37");
         mainPanel.add(dippingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
+
+        borschtSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
         mainPanel.add(borschtSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 50, -1));
 
         borschtLabel.setFont(new java.awt.Font("Matura MT Script Capitals", 0, 18)); // NOI18N
@@ -125,6 +133,15 @@ public class purchaseForm extends javax.swing.JFrame {
         mainPanel.add(taxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, 20));
 
         jMenu1.setText("File");
+
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitButton);
+
         menuBar.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -147,20 +164,27 @@ public class purchaseForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
-        // TODO add your handling code here:
+        //get the values
         int numBeetsa = (int)(beetsaSpinner.getValue());
         int numBanzerotti = (int)(banzerottiSpinner.getValue());
         int numDipping = (int)(dippingSpinner.getValue());
         int numBorscht = (int)(borschtSpinner.getValue());
         
+        //calculate prices
         double subtotal = (numBeetsa * BEETSA_PRICE) + (numBanzerotti * BANZEROTTI_PRICE) + (numDipping * DIPPING_PRICE) + (numBorscht * BORSCHT_PRICE);
         double tax = subtotal * HST;
         double total = subtotal + tax;
         
-        subtotalLabel.setText("Subtotal:    " + df.format(subtotal));
+        //output
+        subtotalLabel.setText("Subtotal:   " + df.format(subtotal));
         totalLabel.setText("Total:       " + df.format(total));
         taxLabel.setText("Tax:         " + df.format(tax));
     }//GEN-LAST:event_calculateButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        //exit program
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,6 +231,7 @@ public class purchaseForm extends javax.swing.JFrame {
     private javax.swing.JButton calculateButton;
     private javax.swing.JLabel dippingLabel;
     private javax.swing.JSpinner dippingSpinner;
+    private javax.swing.JMenuItem exitButton;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
